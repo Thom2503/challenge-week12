@@ -55,3 +55,70 @@ class Investor:
         :return bool, of het verkocht kan worden
         """
         return value > rate
+
+    @staticmethod
+    def buy_at_decrease(coin_data: list, day: int, value: float, rate: float = 0) -> bool:
+        """
+        of je op basis van het huidige bedracht het wilt kopen.
+
+        :param coin_data: list, data van de coin
+        :param day: int, huidige dag
+        :param value: float, huidige waarde van de coin
+        :param rate: float, op welke rate je het moet kopen
+
+        :return bool, of het gekocht kan worden
+        """
+
+        previous_value = coin_data[day - 1]
+        previous_previous_value = coin_data[day - 2]
+
+        return previous_previous_value > previous_value > value
+
+    @staticmethod
+    def sell_at_increase(coin_data: list, day: int, value: float, rate: float = 0) -> bool:
+        """
+        of je op basis van het huidige bedracht het wilt verkopen.
+
+        :param coin_data: list, data van de coin
+        :param day: int, huidige dag
+        :param value: float, huidige waarde van de coin
+        :param rate: float, op welke rate je het moet kopen
+
+        :return bool, of het verkocht kan worden
+        """
+        previous_value = coin_data[day - 1]
+        previous_previous_value = coin_data[day - 2]
+
+        return previous_previous_value < previous_value < value
+
+    @staticmethod
+    def buy_at_date(coin_data: list, day: int, value: float, rate: float = 0) -> bool:
+        """
+        of je op basis van het huidige bedracht het wilt kopen.
+
+        :param coin_data: list, data van de coin
+        :param day: int, huidige dag
+        :param value: float, huidige waarde van de coin
+        :param rate: float, op welke rate je het moet kopen
+
+        :return bool, of het gekocht kan worden
+        """
+        day = str(day)
+        last_number = day[-1:]
+        return last_number == "1"
+
+    @staticmethod
+    def sell_at_date(coin_data: list, day: int, value: float, rate: float = 0) -> bool:
+        """
+        of je op basis van het huidige bedracht het wilt verkopen.
+
+        :param coin_data: list, data van de coin
+        :param day: int, huidige dag
+        :param value: float, huidige waarde van de coin
+        :param rate: float, op welke rate je het moet kopen
+
+        :return bool, of het verkocht kan worden
+        """
+        day = str(day)
+        last_number = day[-1:]
+        return last_number == "5"
