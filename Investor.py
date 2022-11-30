@@ -155,9 +155,8 @@ class Investor:
 
         :return bool, of het gekocht kan worden
         """
-
-        previous_value = coin_data[day - 1]
-        previous_previous_value = coin_data[day - 2]
+        previous_value = coin_data[day - 2]
+        previous_previous_value = coin_data[day - 3]
 
         return previous_previous_value > previous_value > value
 
@@ -173,8 +172,8 @@ class Investor:
 
         :return bool, of het verkocht kan worden
         """
-        previous_value = coin_data[day - 1]
-        previous_previous_value = coin_data[day - 2]
+        previous_value = coin_data[day - 2]
+        previous_previous_value = coin_data[day - 3]
 
         return previous_previous_value < previous_value < value
 
