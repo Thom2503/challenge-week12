@@ -1,5 +1,6 @@
 from prettytable import PrettyTable
 from urllib.request import urlopen
+from Investor import Investor
 import json
 import statistics
 
@@ -102,5 +103,10 @@ def draw_table(coins_data: dict) -> None:
 
 
 if __name__ == "__main__":
+    start_money = 1_000_000
     coins_data = parse_json()
     draw_table(coins_data)
+
+    Alice = Investor(money=start_money, coin_data=coins_data['ALB'])
+    Alice.invest(Investor.buy_at_rate, Investor.sell_at_rate, buy_rate=1500, sell_rate=1600)
+    print(Alice.money)
