@@ -154,6 +154,22 @@ def main():
     Bob.invest(Investor.buy_at_rate, Investor.sell_at_rate, buy_rate=1000, sell_rate=1100)
     print(Bob.money)
 
+    Carol = Investor(money=start_money, coin_data=coins_data['CAS'])
+    Carol.invest(Investor.buy_at_valley, Investor.sell_at_peak)
+    print(Carol.money)
+
+    Dave = Investor(money=start_money, coin_data=coins_data['DUB'])
+    Dave.invest(Investor.buy_at_three_decrease, Investor.sell_at_three_increase)
+    print(Dave.money)
+
+    Eve = Investor(money=start_money, coin_data=coins_data['ELG'])
+    Eve.invest(Investor.buy_at_date, Investor.sell_at_date)
+    print(Eve.money)
+
+    Frank = Investor(money=start_money, coin_data=coins_data['FAW'])
+    Frank.invest(Investor.buy_at_decrease, Investor.sell_at_increase)
+    print(Frank.money)
+
     run = True
 
     while run is True:
