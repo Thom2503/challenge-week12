@@ -1,4 +1,5 @@
 from prettytable import PrettyTable
+from Investor import Investor
 from urllib.request import urlopen
 import json
 import statistics
@@ -141,10 +142,23 @@ def main():
     print("[Q] Quit program")
 
     coins_data = parse_json()
-    choice = input("choose:")
+
+    # Test dingen :)
+    start_money = 1_000_000
+
+    Alice = Investor(money=start_money, coin_data=coins_data['ALB'])
+    Alice.invest(Investor.buy_at_rate, Investor.sell_at_rate, buy_rate=1500, sell_rate=1600)
+    print(Alice.money)
+
+    Bob = Investor(money=start_money, coin_data=coins_data['BHA'])
+    Bob.invest(Investor.buy_at_rate, Investor.sell_at_rate, buy_rate=1000, sell_rate=1100)
+    print(Bob.money)
+
     run = True
 
     while run is True:
+        choice = input("choose:\n")
+
         if choice in ("t", "T"):
             draw_table(coins_data)
             break
