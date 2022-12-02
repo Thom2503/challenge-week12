@@ -1,3 +1,7 @@
+import time
+import requests
+
+
 class Investor:
 
     def __init__(self, money=1_000_000, coin_data=[], is_bot=False):
@@ -27,10 +31,42 @@ class Investor:
             if buy_check(self.coin_data, day, value, rate=buy_rate) and self.money > value:
                 current_amount = round(self.money / value, 1)
                 self.money = round(self.money - (current_amount * value), 2)
-            elif sell_check(self.coin_data, day, value, rate=sell_rate) or day == 365:
+                if self.is_bot is True:
+                    self.upload_data(current_amount, value)
+            elif (sell_check(self.coin_data, day, value, rate=sell_rate) or day == 365) and current_amount > 0:
                 self.money = round(current_amount * value, 2)
+                if self.is_bot is True:
+                    self.upload_data(current_amount, value, is_buy=False)
 
         return self.money
+
+    def upload_data(self, amount: int, value: float, is_buy: bool = True, type: str = "ZOS") -> None:
+        """
+        Upload de sell of buy data naar de api server om mee te kunnen doen in de game.
+
+        :param self, huidige object
+        :param amount: int, hoeveel er gekocht is
+        :param value: float, voor hoeveel er gekocht is
+        :param is_buy: bool, of je wilt kopen anders wil je verkopen
+        :param type: str, welke crypto er gekocht/verkocht wordt
+        """
+        data = {
+            "symbol": type,
+            "type": type,
+            "timestamp": round(time.time()),
+            "quantity": 0,
+            "value": value,
+            "amount": amount
+        }
+
+        url = f"https://api.basecampcrypto.nl/v1/coin/{type}/buy?key=gxV34Ebr5s6ul15q"
+
+        try:
+            resp = requests.post(url, json=data)
+            resp.raise_for_status()
+            print(f"uploaded data at: {data['timestamp']}")
+        except requests.exceptions.HTTPError as err:
+            print(SystemExit(err))
 
     @staticmethod
     def buy_at_rate(coin_data: list, day: int, value: float, rate: float = 0) -> bool:
