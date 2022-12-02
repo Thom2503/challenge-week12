@@ -1,8 +1,9 @@
 class Investor:
 
-    def __init__(self, money=1_000_000, coin_data=[]):
+    def __init__(self, money=1_000_000, coin_data=[], is_bot=False):
         self.money: float = money
         self.coin_data: list = coin_data
+        self.is_bot: bool = is_bot
 
         self.net_profit: float = 0
 

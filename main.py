@@ -221,13 +221,11 @@ def main():
     Om het spel te spelen type Play.
     Als je klaar bent kan je met programma stoppen met quit(Q).
     """
-
     coins_data = parse_json()
 
     print("[T] Table with statistics")
-    print("[I] Outcome for the 6 investers")
-    print("[G] The Graph")
-    print("[play] To play The game")
+    print("[G] The Graphs")
+    print("[P] To play The game")
     print("[Q] Quit program")
 
     run = True
@@ -237,12 +235,9 @@ def main():
 
         if choice in ("t", "T"):
             draw_table(coins_data)
-        elif choice in ("i", "I"):
-            alice, bob, carol, dave, eve, frank = investor_amounts(coins_data)
-            print(alice, bob, carol, dave, eve, frank)
         elif choice in ("g", "G"):
             print("What data do you want to see graphed?")
-            print("[1] individual coins [2] histogram of coin [3] investors [4] ... [5] ... [6] ...")
+            print("[1] individual coins [2] histogram of coin [3] investors")
             choice = input("> ")
 
             if choice == "1":
