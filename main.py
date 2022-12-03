@@ -257,12 +257,6 @@ def main():
                     plt.show()
             elif choice == "3":
                 show_investor_bar_chart(coins_data)
-            elif choice == "4":
-                pass
-            elif choice == "5":
-                pass
-            elif choice == "6":
-                pass
             else:
                 print("Not an option!")
         elif choice in ("play", "Play"):
