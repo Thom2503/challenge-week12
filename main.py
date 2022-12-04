@@ -260,7 +260,9 @@ def main():
             else:
                 print("Not an option!")
         elif choice in ("play", "Play"):
-            pass
+            Bot = Investor(money=start_money, coin_data=coins_data['FAW'], is_bot=True)
+            Bot.invest(Investor.buy_at_three_decrease, Investor.sell_at_three_increase)
+            print(Bot.money)
         elif choice in ("q", "Q"):
             run = False
 
